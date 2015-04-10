@@ -15,7 +15,11 @@
 
     var authorsUri = '/api/authors/'
 
-
+    function getAuthors() {
+        ajaxHelper(authorsUri, 'GET').done(function (data) {
+            self.authors(data);
+        });
+    }
 
     var booksUri = '/api/books/';
 
