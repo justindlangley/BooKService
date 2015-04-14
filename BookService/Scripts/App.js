@@ -13,13 +13,27 @@
         Year: ko.observable()
     }
 
-    var authorsUri = '/api/authors/'
+    var authorsUri = '/api/authors/';
 
     function getAuthors() {
         ajaxHelper(authorsUri, 'GET').done(function (data) {
             self.authors(data);
         });
     }
+    self.addBook = function (formElement) {
+        var book = {
+            AuthorId: self.newBook.Author().Id,
+            Genre: self.newBook.Genre(),
+            Price: self.newBook.Price(),
+            Title: self.newBook.Title(),
+            Year: self.newBook.Year(),
+        };
+        ajaxHelper(booksUri, 'POST', book).done(function (item) {
+            self.book.push(item)
+        });
+    }
+
+    getAuthors();
 
     var booksUri = '/api/books/';
 
